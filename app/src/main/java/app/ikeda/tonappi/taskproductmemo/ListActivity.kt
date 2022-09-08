@@ -25,7 +25,7 @@ class ListActivity : AppCompatActivity() {
 
         //MemoActivityで入力したメモの取り出し
         val memo = intent.getStringExtra("NEW_MEMO")
-        Log.d ("MemoActivityResult",memo.toString())
+        Log.d ("NEW_MEMO",memo.toString())
         
         //配列に入力したメモを追加
         data.add(memo,toString())
