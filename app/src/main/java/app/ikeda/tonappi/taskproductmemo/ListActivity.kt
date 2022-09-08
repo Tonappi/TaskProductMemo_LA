@@ -1,11 +1,15 @@
 package app.ikeda.tonappi.taskproductmemo
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import app.ikeda.tonappi.taskproductmemo.databinding.ActivityListBinding
+
 
 
 class ListActivity : AppCompatActivity() {
@@ -15,6 +19,12 @@ class ListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityListBinding.inflate(layoutInflater).apply { setContentView(this.root) }
+
+
+
+        //MemoActivityで入力したメモの取り出し
+        val memo = intent.getStringExtra("NEW_MEMO")
+        Log.d ("MemoActivityResult",memo.toString())
 
         //Adapterに渡す配列を作成
         val data = arrayOf("test1","test2","test3","test4")
@@ -27,6 +37,8 @@ class ListActivity : AppCompatActivity() {
 
         //adapterをlistViewに紐付ける
         listView.adapter = adapter
+
+
 
         //add_buttonクリック時にMemoActivityへ画面遷移
         binding.addButton.setOnClickListener{
