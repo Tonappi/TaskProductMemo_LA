@@ -24,13 +24,11 @@ class MemoActivity : AppCompatActivity() {
         //check_buttonクリック時
             binding.checkButton.setOnClickListener {
 
-                //editTextのテキストをinputTextとして取得
                 val inputText = editText.text.toString()
-
 
                 //ListActivityへ画面遷移
                 val toListActivityIntent = Intent(this, ListActivity::class.java)
-                intent.putExtra("NEW_MEMO",inputText.toString())
+                toListActivityIntent.putExtra("NEW_MEMO",inputText.toString())
                 Log.d("TEXT",inputText.toString())
                 startActivity(toListActivityIntent)
 

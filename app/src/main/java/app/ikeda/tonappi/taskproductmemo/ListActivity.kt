@@ -26,7 +26,7 @@ class ListActivity : AppCompatActivity() {
         //MemoActivityで入力したメモの取り出し
         val memo = intent.getStringExtra("NEW_MEMO")
         Log.d ("MemoActivityResult",memo.toString())
-        
+
         //配列に入力したメモを追加
         data.add(memo,toString())
 
@@ -38,7 +38,6 @@ class ListActivity : AppCompatActivity() {
 
         //adapterをlistViewに紐付ける
         listView.adapter = adapter
-
 
         //add_buttonクリック時にMemoActivityへ画面遷移
         binding.addButton.setOnClickListener{
