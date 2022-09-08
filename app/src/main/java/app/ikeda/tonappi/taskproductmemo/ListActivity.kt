@@ -26,14 +26,11 @@ class ListActivity : AppCompatActivity() {
         // 配列に入力したメモを追加
         data.add(memo, toString())
 
-        // xmlにて実装したListViewの取得
-        val listView = findViewById<ListView>(R.id.list_view)
-
         // adapterを作成
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, data)
 
         // adapterをlistViewに紐付ける
-        listView.adapter = adapter
+        binding.listView.adapter = adapter
 
         // add_buttonクリック時にMemoActivityへ画面遷移
         binding.addButton.setOnClickListener {
