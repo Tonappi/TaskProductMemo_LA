@@ -20,11 +20,11 @@ class ListActivity : AppCompatActivity() {
         val data = mutableListOf<String>("test1", "test2", "test3", "test4")
 
         // MemoActivityで入力したメモの取り出し
-        val memo = intent.getStringExtra("NEW_MEMO")
-        Log.d("NEW_MEMO", memo.toString())
+        val memo = intent.getStringExtra("NEW_MEMO") ?: ""
+        Log.d("NEW_MEMO", memo)
 
         // 配列に入力したメモを追加
-        data.add(memo, toString())
+        data.add(memo)
 
         // adapterを作成
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, data)
