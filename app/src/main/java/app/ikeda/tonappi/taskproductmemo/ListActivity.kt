@@ -1,5 +1,6 @@
 package app.ikeda.tonappi.taskproductmemo
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -26,6 +27,15 @@ class ListActivity : AppCompatActivity() {
 
         //adapterをlistViewに紐付ける
         listView.adapter = adapter
+
+        //add_buttonクリック時にMemoActivityへ画面遷移
+        binding.addButton.setOnClickListener{
+            val toMemoActivityIntent = Intent(this, MemoActivity::class.java)
+            startActivity(toMemoActivityIntent)
+        }
+
+
+
 
 
 
