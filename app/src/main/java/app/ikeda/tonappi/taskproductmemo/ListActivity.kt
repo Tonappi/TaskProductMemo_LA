@@ -4,15 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import app.ikeda.tonappi.taskproductmemo.databinding.ActivityMainBinding
+import app.ikeda.tonappi.taskproductmemo.databinding.ActivityListBinding
 
-class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+class ListActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater).apply { setContentView(this.root) }
+        binding = ActivityListBinding.inflate(layoutInflater).apply { setContentView(this.root) }
 
         //Adapterに渡す配列を作成
         val data = arrayOf("test1","test2","test3","test4")
