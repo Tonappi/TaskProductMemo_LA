@@ -19,7 +19,6 @@ class MemoActivity : AppCompatActivity() {
         binding = ActivityMemoBinding.inflate(layoutInflater).apply { setContentView(this.root) }
 
 
-
         val editText = findViewById<EditText>(R.id.edit_text)
 
         //check_buttonクリック時
@@ -28,12 +27,16 @@ class MemoActivity : AppCompatActivity() {
                 //editTextのテキストをinputTextとして取得
                 val inputText = editText.text.toString()
 
+
                 //ListActivityへ画面遷移
                 val toListActivityIntent = Intent(this, ListActivity::class.java)
                 intent.putExtra("NEW_MEMO",inputText.toString())
+                Log.d("TEXT",inputText.toString())
                 startActivity(toListActivityIntent)
 
                 
             }
     }
+
+
 }
