@@ -24,6 +24,7 @@ class MemoActivity : AppCompatActivity() {
         //check_buttonクリック時
             binding.checkButton.setOnClickListener {
 
+
                 val inputText = editText.text.toString()
 
                 //ListActivityへ画面遷移
