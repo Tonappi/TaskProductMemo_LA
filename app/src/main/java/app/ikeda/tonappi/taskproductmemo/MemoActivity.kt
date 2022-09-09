@@ -29,7 +29,6 @@ class MemoActivity : AppCompatActivity() {
                 //ListActivityへ画面遷移
                 val toListActivityIntent = Intent(this, ListActivity::class.java)
                 toListActivityIntent.putExtra("NEW_MEMO",inputText.toString())
-                Log.d("TEXT",inputText.toString())
                 startActivity(toListActivityIntent)
 
                 

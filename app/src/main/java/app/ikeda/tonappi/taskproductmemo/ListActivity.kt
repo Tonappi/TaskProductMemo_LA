@@ -20,18 +20,21 @@ class ListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityListBinding.inflate(layoutInflater).apply { setContentView(this.root) }
 
+        //xmlにて実装したListViewの取得
+        val listView = findViewById<ListView>(R.id.list_view)
+
+        //MemoActivityで入力したメモの取り出し
+        var memo = intent.getStringExtra("NEW_MEMO")
+        Log.d ("MemoActivityResult",memo.toString())
+
         //Adapterに渡す配列を作成
         val data = mutableListOf<String>("test1","test2","test3","test4")
 
-        //MemoActivityで入力したメモの取り出し
-        val memo = intent.getStringExtra("NEW_MEMO")
-        Log.d ("MemoActivityResult",memo.toString())
 
         //配列に入力したメモを追加
-        data.add(memo,toString())
+        data.add(memo.toString())
+        Log.d("ListData",data.toString())
 
-        //xmlにて実装したListViewの取得
-        val listView = findViewById<ListView>(R.id.list_view)
 
         //adapterを作成
         val adapter = ArrayAdapter (this, android.R.layout.simple_list_item_1,data)
@@ -39,16 +42,12 @@ class ListActivity : AppCompatActivity() {
         //adapterをlistViewに紐付ける
         listView.adapter = adapter
 
+
         //add_buttonクリック時にMemoActivityへ画面遷移
         binding.addButton.setOnClickListener{
             val toMemoActivityIntent = Intent(this, MemoActivity::class.java)
             startActivity(toMemoActivityIntent)
         }
-
-
-
-
-
 
     }
 }
