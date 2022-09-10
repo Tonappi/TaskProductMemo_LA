@@ -32,9 +32,15 @@ class ListActivity : AppCompatActivity() {
 
         //前回までのメモを呼び出し
         val savedString = pref.getString("DataKey","NoData")
-        //文字列で保存したデータを配列にして加える
-        val savedList = savedString?.split(',')
-        data.add(savedList.toString())
+        //文字列で保存したデータをリストにして加える
+        val savedList = savedString?.split(',')?.dropLastWhile { it.isEmpty() }
+        if (savedList != null) {
+            for (savedData in savedList){
+                data.add(savedData.toString())
+            }
+        }
+        Log.d("toList",savedList.toString())
+
 
         //MemoActivityで入力したメモの取り出し
         var memo = intent.getStringExtra("NEW_MEMO")
@@ -44,6 +50,7 @@ class ListActivity : AppCompatActivity() {
         if(memo.isNullOrEmpty().not()){
             data.add(memo.toString())
         }
+        Log.d("joinedList",data.toString())
 
 
 
@@ -69,13 +76,13 @@ class ListActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
 
-        /*リストを文字列に変換する
+        //リストを文字列に変換する
         data.joinToString(separator = ",")
         Log.d("ListData",data.toString())
         //dataの書き込み
         val editor = pref.edit()
         editor.putString("DataKey", data.toString())
-        editor.apply()*/
+        editor.apply()
     }
 
 }
