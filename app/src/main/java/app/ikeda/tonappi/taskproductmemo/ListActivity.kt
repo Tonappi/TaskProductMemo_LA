@@ -1,13 +1,17 @@
 package app.ikeda.tonappi.taskproductmemo
 
+import android.accounts.AccountManager.get
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import androidx.annotation.RequiresApi
 import app.ikeda.tonappi.taskproductmemo.databinding.ActivityListBinding
 import org.json.JSONArray
 
@@ -15,32 +19,26 @@ import org.json.JSONArray
 class ListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityListBinding
-
     private lateinit var pref: SharedPreferences
-
-    //Adapterに渡す配列を作成
-    private var data = mutableListOf<String>()
+    private  var data = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityListBinding.inflate(layoutInflater).apply { setContentView(this.root) }
         pref = getSharedPreferences("SharedPref",Context.MODE_PRIVATE)
 
 
-        //xmlにて実装したListViewの取得
-        val listView = findViewById<ListView>(R.id.list_view)
-
-        //前回までのメモを呼び出し
+        //文字列で保存したデータを呼び出し
         val savedString = pref.getString("DataKey","NoData")
         //文字列で保存したデータをリストにして加える
         val savedList = savedString?.split(',')?.dropLastWhile { it.isEmpty() }
         if (savedList != null) {
-            for (savedData in savedList){
-                data.add(savedData.toString())
+            for ( i in savedList.indices){
+                data.add(savedList[i].toString())
             }
         }
         Log.d("toList",savedList.toString())
-
 
         //MemoActivityで入力したメモの取り出し
         var memo = intent.getStringExtra("NEW_MEMO")
@@ -52,12 +50,9 @@ class ListActivity : AppCompatActivity() {
         }
         Log.d("joinedList",data.toString())
 
-
-
-        //adapterを作成
+        //リスト表示する
+        val listView = findViewById<ListView>(R.id.list_view)
         val adapter = ArrayAdapter (this, android.R.layout.simple_list_item_1,data)
-
-        //adapterをlistViewに紐付ける
         listView.adapter = adapter
 
         //add_buttonクリック時
@@ -68,20 +63,27 @@ class ListActivity : AppCompatActivity() {
 
         }
 
-
     }
 
 
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onPause() {
         super.onPause()
+        //リストから要素を取得し","で区切った文字列にする
+        var DataText = ""
+        for(i in data.indices){
+            DataText += data[i]+","
+        }
+        Log.d("ListData",DataText.toString())
 
-        //リストを文字列に変換する
+        /*リストを文字列に変換する
         data.joinToString(separator = ",")
-        Log.d("ListData",data.toString())
-        //dataの書き込み
+       */
+
+        //保存データの書き込み
         val editor = pref.edit()
-        editor.putString("DataKey", data.toString())
+        editor.putString("DataKey", DataText.toString())
         editor.apply()
     }
 

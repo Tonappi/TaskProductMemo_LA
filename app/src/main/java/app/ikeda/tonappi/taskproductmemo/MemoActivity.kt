@@ -13,18 +13,16 @@ class MemoActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMemoBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMemoBinding.inflate(layoutInflater).apply { setContentView(this.root) }
-
 
         val editText = findViewById<EditText>(R.id.edit_text)
 
         //check_buttonクリック時
             binding.checkButton.setOnClickListener {
 
-
+                //入力した文字を文字列にする
                 val inputText = editText.text.toString()
 
                 //ListActivityへ画面遷移
